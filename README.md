@@ -1,4 +1,4 @@
-# vue-study-pr
+# vue-study-momentum
 
 ## Project setup
 ```
