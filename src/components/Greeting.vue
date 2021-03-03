@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <!-- <h1><span>{{ msg }}, </span><span><Input :value="getName" /></span></h1> -->
-    <h1><span>{{ msg }}, </span><span>{{ getName }}!</span></h1>
+    <h1><span>{{ getGreetingMsg }}, </span><span>{{ getName }}!</span></h1>
   </div>
 </template>
 
@@ -18,7 +18,14 @@ export default {
   },
   computed: {
     getName,
-  }
+    getGreetingMsg() {
+      const hours = new Date().getHours()
+      if (hours < 12) {
+        return 'Good Morning'
+      }
+      return hours < 18 ? 'Good Evening' : 'Good Night'
+    }
+  },
 }
 </script>
 
