@@ -5,7 +5,8 @@
   </div>
 </template>
 
-<script>
+
+<script lang="ts">
 import { getName } from '../utils/storageUtils'
 
 export default {

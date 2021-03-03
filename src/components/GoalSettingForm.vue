@@ -5,19 +5,21 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  
+import { defineComponent } from 'vue'
 import { setGoal } from '../utils/storageUtils'
 import Input from './Input.vue'
 
-export default {
+export default defineComponent({
   components: { Input },
   name: 'GoalSettingForm',
   methods: {
-    submitGoal(goal) {
+    submitGoal(goal: string) {
       setGoal(goal)
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

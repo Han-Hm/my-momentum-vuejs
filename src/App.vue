@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <ul class="background"></ul>
-    <!-- <ul class="background overlay"></ul> -->
     <div v-if="name">
       <Watch />
       <Greeting />
@@ -19,15 +18,16 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import {defineComponent} from 'vue'
 import Watch from './components/Watch.vue'
 import Greeting from './components/Greeting.vue'
-import Input from './components/Input'
+import Input from './components/Input.vue'
 import { getGoal, getName, setName } from './utils/storageUtils'
 import GoalSettingForm from './components/GoalSettingForm.vue'
 import Goal from './components/Goal.vue'
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
     Watch,
@@ -38,8 +38,8 @@ export default {
   },
   data() {
     return {
-      name: null,
-      goal: null
+      name: '',
+      goal: ''
     }
   },
   created() {
@@ -48,15 +48,12 @@ export default {
     console.log(this.goal)
   },
   methods: {
-    initName(name) {
-      this.name = name;
+    initName(name: string) {
       setName(name)
+      this.name = name;
     }
   },
-  computed: {
-    getGoal
-  }
-}
+})
 </script>
 
 <style>

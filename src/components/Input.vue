@@ -3,9 +3,11 @@
     <input type="text" v-model="newValue" @keypress.enter="onKeypressEnter" />
   </div>
 </template>
-<script>
+<script lang="ts">
+import { defineComponent } from "vue"
 
-export default {
+
+export default defineComponent({
   name: 'Input',
   props: {
     value: {
@@ -23,7 +25,7 @@ export default {
       this.$emit('key-enter', this.newValue);
     }
   }
-};
+});
 </script>
 <style scoped>
 input {

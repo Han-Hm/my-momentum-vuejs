@@ -4,47 +4,16 @@
   </div>
 </template>
 
-<script>
-// import { ref, onBeforeMount, onMounted, onUnmounted } from 'vue';
-export default {
+<script lang="ts">import { defineComponent } from "vue";
+
+export default defineComponent({
   name: 'Watch',
-  // setup() {
-  //   let hh = ref('');
-  //   let mm = ref('');
-  //   let ss = ref('');
-  //   let timerId = ref(0);
-    
-  //   function addZeros(n) {
-  //     return n.toString().length === 1 ? '0' + n : n.toString();
-  //   }
-  //   function setTime() {
-  //     const date = new Date();
-  //     hh = addZeros(date.getHours());
-  //     mm = addZeros(date.getMinutes());
-  //     ss = addZeros(date.getSeconds());
-  //   }
-  //   onBeforeMount(() => {
-  //     setTime();
-  //   })
-  //   onMounted(() => {
-  //     timerId = setInterval(setTime, 1000);
-  //   });
-  //   onUnmounted(() => {
-  //     if (timerId.value) {
-  //       clearInterval(timerId);
-  //       timerId = 0;
-  //     }
-  //   });
-  //   return {
-  //     hh, mm, ss
-  //   }
-  // },
   data () {
     return {
-      hh: 0,
-      mm: 0,
-      ss: 0,
-      timerId: null,
+      hh: '00',
+      mm: '00',
+      ss: '00',
+      timerId: 0,
     }
   },
   methods: {
@@ -54,7 +23,7 @@ export default {
       this.mm = this.addZeros(date.getMinutes());
       this.ss = this.addZeros(date.getSeconds());
     },
-    addZeros(n) {
+    addZeros(n: number) {
       return n.toString().length === 1 ? '0' + n : n.toString();
     }
   },
@@ -69,7 +38,7 @@ export default {
       clearInterval(this.timerId);
     }
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -82,7 +51,7 @@ export default {
     font-weight: 500;
     user-select: none;
   }
-  p{
+  p {
     margin-block-end: 0;
   }
 </style>

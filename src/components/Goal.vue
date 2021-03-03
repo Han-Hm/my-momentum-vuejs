@@ -5,9 +5,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue"
 
-export default {
+export default defineComponent({
   name: 'Goal',
   props: {
     goal: {
@@ -18,7 +19,7 @@ export default {
   created() {
     console.log(this.goal)
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
