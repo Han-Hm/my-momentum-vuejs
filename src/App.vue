@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 import Watch from './components/Watch.vue'
 import Greeting from './components/Greeting.vue'
 import Input from './components/Input.vue'
