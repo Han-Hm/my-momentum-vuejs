@@ -11,11 +11,6 @@ import { getName } from '../utils/storageUtils'
 
 export default {
   name: 'Greeting',
-  data() {
-    return {
-      msg: 'Hello'
-    }
-  },
   computed: {
     getName,
     getGreetingMsg() {

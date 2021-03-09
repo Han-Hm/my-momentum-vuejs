@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ul class="background"></ul>
+    <ul class="background" :style="wrapperStyle"></ul>
     <div v-if="name">
       <Watch />
       <Greeting />
@@ -18,14 +18,15 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" >
+import { defineComponent, ref, computed } from 'vue'
 import Watch from './components/Watch.vue'
 import Greeting from './components/Greeting.vue'
 import Input from './components/Input.vue'
 import { getGoal, getName, setName } from './utils/storageUtils'
 import GoalSettingForm from './components/GoalSettingForm.vue'
 import Goal from './components/Goal.vue'
+import getUnsplash from './utils/getUnsplash'
 
 export default defineComponent({
   name: 'App',
@@ -36,23 +37,25 @@ export default defineComponent({
     GoalSettingForm,
     Goal,
   },
-  data() {
+  setup() {
+    const name = ref(getName());
+    const goal = ref(getGoal());
+    const unsplash = ref(getUnsplash());
+    const wrapperStyle = computed(() => ({
+      'background-image': `url(${unsplash.value?.urls?.regular})`
+    }));
+
+    const initName = (newName: string) => {
+      setName(newName);
+      name.value = newName;
+    }
     return {
-      name: '',
-      goal: ''
+      name,
+      goal,
+      initName,
+      wrapperStyle
     }
-  },
-  created() {
-    this.name = getName();
-    this.goal = getGoal();
-    console.log(this.goal)
-  },
-  methods: {
-    initName(name: string) {
-      setName(name)
-      this.name = name;
-    }
-  },
+  }
 })
 </script>
 
@@ -84,7 +87,5 @@ export default defineComponent({
 
   margin: 0;
   padding: 0;
-  
-  background-image: url(https://farm5.staticflickr.com/4176/34378167170_be43601df6_k.jpg?momo_cache_bg_uuid=db7c36d0-28ec-40da-ba6c-872d3746f2be);
 }
 </style>
