@@ -14,8 +14,8 @@ export default function getUnsplash() {
       .then(result => {
         photo.value = result.response;
       })
-      .catch(() => {
-        console.error("something went wrong!");
+      .catch((e) => {
+        console.error(e.message);
       });
   }
   searchPhotos();
