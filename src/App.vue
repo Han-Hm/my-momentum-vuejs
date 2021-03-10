@@ -40,7 +40,7 @@ export default defineComponent({
   setup() {
     const name = ref(getName());
     const goal = ref(getGoal());
-    const unsplash = ref(getUnsplash());
+    const unsplash = getUnsplash();
     const wrapperStyle = computed(() => ({
       'background-image': `url(${unsplash.value?.urls?.regular})`
     }));
