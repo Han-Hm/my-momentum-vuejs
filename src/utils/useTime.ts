@@ -7,6 +7,7 @@ const DateFormats = {
   'hh:mm a': 10000
 }
 export type DateFormat = keyof typeof DateFormats;
+
 export default function useTime(dateStringFormat: DateFormat) {
   const time = ref(format(new Date(), dateStringFormat));
   setInterval(() => {
