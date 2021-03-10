@@ -19,7 +19,7 @@
     },
     setup: (props, { emit }) => {
       const submit = (arg: string) => {
-        emit('submit-form', arg);
+        emit('submitForm', arg);
       }
 
       return { submit }

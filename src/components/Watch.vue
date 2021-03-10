@@ -1,44 +1,30 @@
 <template>
   <div class="watch">
-    <p>{{hh}}:{{mm}}:{{ss}}</p>
+    <div>{{time}}</div>
+    <div class="change" v-on:click="changeDateFormat"></div>
   </div>
 </template>
 
-<script lang="ts">import { defineComponent } from "vue";
+<script lang="ts">
+  import { computed, defineComponent, ref } from "vue";
+  import useTime, { DateFormat } from "../utils/useTime";
 
-export default defineComponent({
-  name: 'Watch',
-  data () {
-    return {
-      hh: '00',
-      mm: '00',
-      ss: '00',
-      timerId: 0,
-    }
-  },
-  methods: {
-    setTime() {
-      const date = new Date();
-      this.hh = this.addZeros(date.getHours());
-      this.mm = this.addZeros(date.getMinutes());
-      this.ss = this.addZeros(date.getSeconds());
+  export default defineComponent({
+    name: 'Watch',
+    setup() {
+      const dateFormat = ref<DateFormat>('HH:mm:ss');
+      const time = useTime(dateFormat.value);
+      const changeDateFormat = () => {
+        console.log('@@')
+        dateFormat.value = 'hh:mm a';
+      }
+      
+      return {
+        time, 
+        changeDateFormat
+      }
     },
-    addZeros(n: number) {
-      return n.toString().length === 1 ? '0' + n : n.toString();
-    }
-  },
-  mounted() {
-    this.timerId = setInterval(this.setTime, 1000);
-  },
-  created() {
-    this.setTime();
-  },
-  unmounted() {
-    if (this.timerId !== null) {
-      clearInterval(this.timerId);
-    }
-  }
-})
+  })
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -51,7 +37,9 @@ export default defineComponent({
     font-weight: 500;
     user-select: none;
   }
-  p {
-    margin-block-end: 0;
+  .change {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
   }
 </style>
