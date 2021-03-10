@@ -8,52 +8,45 @@
         <Goal :goal="goal"/>
       </div>
       <div v-else>
-        <GoalSettingForm />
+        <Form :msg="'What is your main focus for today?'" v-on:submit-form="setGoal"/>
       </div>
     </div>
     <div v-else>
-      <h1>Hello, what's your name?</h1>
-      <Input v-on:key-enter="initName"/>
+      <Form :msg="'Hello, what\'s your name?'" v-on:submit-form="setName"/>
     </div>
   </div>
 </template>
 
 <script lang="ts" >
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 import Watch from './components/Watch.vue'
 import Greeting from './components/Greeting.vue'
-import Input from './components/Input.vue'
-import { getGoal, getName, setName } from './utils/storageUtils'
-import GoalSettingForm from './components/GoalSettingForm.vue'
+import Form from './components/Form.vue'
 import Goal from './components/Goal.vue'
 import getUnsplash from './utils/getUnsplash'
+import useUserData from './utils/useUserData'
 
 export default defineComponent({
   name: 'App',
   components: {
     Watch,
     Greeting,
-    Input,
-    GoalSettingForm,
+    Form,
     Goal,
   },
   setup() {
-    const name = ref(getName());
-    const goal = ref(getGoal());
+    const { name, goal, setName, setGoal } = useUserData();
     const unsplash = getUnsplash();
     const wrapperStyle = computed(() => ({
       'background-image': `url(${unsplash.value?.urls?.regular})`
     }));
 
-    const initName = (newName: string) => {
-      setName(newName);
-      name.value = newName;
-    }
     return {
       name,
       goal,
-      initName,
-      wrapperStyle
+      wrapperStyle,
+      setName,
+      setGoal
     }
   }
 })

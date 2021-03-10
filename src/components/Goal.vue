@@ -16,9 +16,6 @@ export default defineComponent({
       default: ''
     }
   },
-  created() {
-    console.log(this.goal)
-  }
 })
 </script>
 
